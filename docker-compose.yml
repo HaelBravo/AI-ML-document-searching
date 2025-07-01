@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  ubuntu24x86-service:
+    container_name: Ubuntu24x86-Container
+    image: ubuntu24x86
+    volumes:
+      - .:/mainDir/AI-ML-document-searching
+    networks:
+      - ubuntuNetwork
+    ports:
+      - "8000:8000"
+networks:
+  ubuntuNetwork:
+volumes:
+  pip-cache:
