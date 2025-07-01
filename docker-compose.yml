@@ -4,7 +4,7 @@ services:
     container_name: Ubuntu24x86-Container
     image: ubuntu24x86
     volumes:
-      - ./AI-ML-document-searching:/mainDir/AI-ML-document-searching
+      - .:/mainDir/AI-ML-document-searching
     networks:
       - ubuntuNetwork
     ports:
