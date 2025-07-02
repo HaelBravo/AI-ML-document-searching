@@ -1,6 +1,8 @@
-from baseLoader import *
 import io
 from PIL import Image
+
+from my_app.interfaces.baseLoader import BaseLoader
+
 
 class ImageLoader(BaseLoader):
     
