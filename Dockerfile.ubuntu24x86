@@ -1,0 +1,49 @@
+# Dockerfile para el entorno de trabajo en Ubuntu.
+# Imagen base de ubuntu:
+FROM ubuntu:24.04
+
+# Evita prompts interactivos:
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Establecemos el área de trabajo:
+WORKDIR /mainDir
+
+# Copiamos el script de inicio del contenedor:
+COPY init-UbuntuContainer.sh /bin/init-UbuntuContainer.sh
+
+# Actualiza e instala herramietas básicas:
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y \
+    build-essential \
+    curl \
+    git \
+    wget \
+    vim \
+    nano \
+    python3.12 \
+    python3.12-venv \
+    python3-pip \
+    locales \
+    tzdata && \
+    # Configura locale en_US.UTF-8
+    locale-gen en_US.UTF-8 && \
+    update-locale LANG=en_US.UTF-8 && \
+    # Configura timezone America/Mexico_City
+    ln -fs /usr/share/zoneinfo/America/Mexico_City /etc/localtime && \
+    dpkg-reconfigure -f noninteractive tzdata && \
+    # Limpieza
+    apt-get clean && rm -rf /var/lib/apt/lists/* && \
+    # Otorgamos permisos de ejecución al script de inicio:
+    chmod +x /bin/init-UbuntuContainer.sh
+
+# Establecemos las variables de entorno para el locale
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
+
+
+# Exponemos el puerto con la maquina host:
+EXPOSE 8000
+
+# Comando por defecto (modifícalo según tu stack)
+CMD [ "/bin/init-UbuntuContainer.sh" ]
