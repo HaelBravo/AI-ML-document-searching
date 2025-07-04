@@ -1,0 +1,10 @@
+import requests
+
+payload = {
+    "model": "nomic-embed-text",  # or llama2, or your chosen model
+    "prompt": "Most notable to Rebecca was her lack of success in the dating department. Sure, she had a serious boyfriend of four years who was a great, laid-back guy. He owned the house they lived in together and had a successful job. He was eight years younger and, like her, saw the prospect of children as a ball and chain to be avoided. Prior to this relationship, though, she had been devastated by two broken-off engagements and one long-term partnership in which she had been cheated on for years. Her entire social circle had known it was happening, but no one had said anything. Rebecca processed these experiences as personal failures that were her fault, though she could not quite explain what she had done wrong. She had many, many close friends and was gifted at several hobbies, including surfing and pottery – her pieces showed in local galleries and were a dependable income source. Nonetheless, Rebecca felt that she was not the full package. It was not just intimate relationships that had been a source of emotional pain for her. Although Rebecca had graduated from a topnotch college with honours studying industrial design, she had bounced between jobs over the years, chronically indecisive about whether she preferred to work for herself or someone else. As a talented jack-of-all-trades, she could easily pick up work in several different arenas, but ultimately found these endeavours curtailed by the temptation to take off to work and travel abroad for months. Now, in midlife, she was questioning the life decisions that had left her living paycheck to paycheck, with no savings or assets."
+}
+
+resp = requests.post("http://localhost:11434/api/embeddings", json=payload)
+print(resp.status_code)
+print(resp.json())

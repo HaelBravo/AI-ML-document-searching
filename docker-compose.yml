@@ -21,6 +21,18 @@ services:
       - qdrant-storage:/qdrant/storage
     networks:
       - ubuntuNetwork
+  ollama-service:
+    container_name: Ollama-Container
+    image: ollama-img
+    ports:
+      - "11434:11434"
+    environment:
+      - OLLAMA_HOST=0.0.0.0:11434
+    command: ["ollama", "serve"]
+    networks:
+      - ubuntuNetwork
+    volumes:
+      - /ollama-data:/root/.ollama
 
 networks:
   ubuntuNetwork:
