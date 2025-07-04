@@ -1,0 +1,16 @@
+# Dockerfile para definir un entorno para el uso de LLM's con Ollama.
+FROM ubuntu:24.04
+
+# Actualizamos e instalamos dependecias:
+RUN apt-get update && \
+    apt-get install -y curl libtinfo6 libatomic1 && \
+    apt-get clean
+
+# Install Ollama:
+RUN curl -fsSL https https://ollama.com/install.sh | sh
+
+# Exponemos el puerto de la API de Ollama:
+EXPOSE 11434
+
+# Ejecutamos el servidor de ollama:
+CMD ["ollama","serve"]
